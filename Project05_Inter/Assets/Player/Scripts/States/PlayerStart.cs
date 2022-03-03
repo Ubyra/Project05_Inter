@@ -16,9 +16,4 @@ public class PlayerStart : PlayerState
 
         Player.SetState(new Idle(Player));
     }
-
-    public override void Stop()
-    {
-        base.Stop();
-    }
 }

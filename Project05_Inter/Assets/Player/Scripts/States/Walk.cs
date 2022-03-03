@@ -10,7 +10,7 @@ public class Walk : PlayerState
 
     public override void Move()
     {
-        Player.rb.AddForce(Player.direction * Player.playerVelocity);
+        Player.rb.AddForce(Player.direction * Player.playerVelocity * Time.deltaTime * 100);
         //Vector3 movement = Player.direction * Player.playerVelocity;
         //Player.rb.velocity = movement;
     }

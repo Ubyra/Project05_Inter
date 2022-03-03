@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 689390926}
-  playerVelocity: 25
+  playerVelocity: 60
   turnSmoothTime: 0.1
   direction: {x: 0, y: 0, z: 0}
 --- !u!54 &689390926

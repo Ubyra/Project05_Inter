@@ -6,6 +6,9 @@ public class PlayerSystems : PlayerStateMachine
 {
     [Header("Player Atributes")]
     public Rigidbody rb;
+    public NPCChecker npcChecker;
+    public UiElementsManager interfaceManager;
+    public GameObject actualInteractedNPC;
 
     [Header("Player Movement")]
     public float playerVelocity;
@@ -23,6 +26,20 @@ public class PlayerSystems : PlayerStateMachine
     private void Update()
     {
         MovementCheck();
+
+        if (npcChecker.closestNPC != null)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                State.Interact();
+            }
+        }
+        else
+        {
+            // clena dialogue text
+            interfaceManager.dialogueObject.SetActive(false);
+        }
+
     }
 
     private void MovementCheck()

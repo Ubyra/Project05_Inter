@@ -16,4 +16,11 @@ public class Idle : PlayerState
     {
         Player.SetState(new Walk(Player));
     }
+
+    public override void Interact()
+    {
+        // Sett the dialogue Text;
+        Player.interfaceManager.dialogueObject.SetActive(true);
+        Player.actualInteractedNPC = Player.npcChecker.closestNPC.gameObject;
+    }
 }

@@ -17,4 +17,9 @@ public class Walk : PlayerState
     {
         Player.SetState(new Idle(Player));
     }
+
+    public override void Interact()
+    {
+        Player.DialogueController();
+    }
 }

@@ -8,7 +8,8 @@ public class PlayerSystems : PlayerStateMachine
     public Rigidbody rb;
     public NPCChecker npcChecker;
     public UiElementsManager interfaceManager;
-    public GameObject actualInteractedNPC;
+    public GameObject atualInteractedNPC;
+    public int atualText = -1;
 
     [Header("Player Movement")]
     public float playerVelocity;
@@ -27,17 +28,21 @@ public class PlayerSystems : PlayerStateMachine
     {
         MovementCheck();
 
-        if (npcChecker.closestNPC != null)
+        if (npcChecker.targetNPC != null)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (npcChecker.targetNPC.gameObject != atualInteractedNPC)
+                Dialogue(false);
+
+            if (Input.GetKeyDown(KeyCode.G))
             {
                 State.Interact();
             }
+
         }
         else
         {
-            // clena dialogue text
-            interfaceManager.dialogueObject.SetActive(false);
+            interfaceManager.dialogueText.text = "";
+            Dialogue(false);
         }
 
     }
@@ -48,31 +53,58 @@ public class PlayerSystems : PlayerStateMachine
         inputDirection.z = Input.GetAxisRaw("Vertical");
         inputDirection.Normalize();
 
-        var cam = Camera.main;
-        var foward = cam.transform.forward;
-        var right = cam.transform.right;
-
-        var parentTransform = gameObject.GetComponentInParent<Transform>();
-
-        foward.y = 0;
-        right.y = 0f;
-        foward.Normalize();
-        right.Normalize();
-
-        direction = (foward * inputDirection.z + right * inputDirection.x).normalized;
+        direction.x = inputDirection.x;
+        direction.z = inputDirection.z;
+        direction.Normalize();
 
         if (inputDirection.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Deg2Rad + cam.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(parentTransform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-
-            parentTransform.rotation = Quaternion.Euler(0f, angle, 0f);
+            //float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
 
             State.Move();
         }
         else if (inputDirection.magnitude < 0.1f)
         {
             State.Stop();
+        }
+    }
+
+    public void Dialogue(bool condition)
+    {
+        if (condition)
+        {
+            atualInteractedNPC = npcChecker.targetNPC.gameObject;
+        }
+        else
+        {
+            atualInteractedNPC = null;
+        }
+
+        interfaceManager.dialogueObject.SetActive(condition);
+    }
+
+    public void DialogueController()
+    {
+        if (atualText == -1)
+        {
+            atualText = 0;
+            interfaceManager.dialogueText.text = npcChecker.targetNPC.configs.firstDialogueOption[atualText];
+            interfaceManager.dialogueName.text = npcChecker.targetNPC.configs.npcName;
+            Dialogue(true);
+        }
+        else
+        {
+            atualText += 1;
+            if (atualText < npcChecker.targetNPC.configs.firstDialogueOption.Length)
+            {
+                interfaceManager.dialogueText.text = npcChecker.targetNPC.configs.firstDialogueOption[atualText];
+            }
+            else
+            {
+                atualText = -1;
+                Dialogue(false);
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ public class NPCChecker : MonoBehaviour
 {
     public float radiusCheck;
     public LayerMask NPCLayer;
-    public NPCSystem closestNPC;
+    public NPCSystem targetNPC;
 
     private void Update()
     {
@@ -15,10 +15,10 @@ public class NPCChecker : MonoBehaviour
 
     public void DisplayNPCCanvas(bool active)
     {
-        if (closestNPC == null)
+        if (targetNPC == null)
             return;
 
-        closestNPC.interactionCanvas.SetActive(active);
+        targetNPC.interactionCanvas.SetActive(active);
     }
 
     private void CheckArround()
@@ -30,15 +30,15 @@ public class NPCChecker : MonoBehaviour
         {
             for (int i = 0; i < arround.Length; i++)
             {
-                if (closestNPC == null)
+                if (targetNPC == null)
                 {
-                    closestNPC = arround[i].GetComponent<NPCSystem>();
+                    targetNPC = arround[i].GetComponent<NPCSystem>();
                 }
 
-                if (Vector3.Distance(transform.position, arround[i].transform.position) < Vector3.Distance(transform.position, closestNPC.transform.position))
+                if (Vector3.Distance(transform.position, arround[i].transform.position) < Vector3.Distance(transform.position, targetNPC.transform.position))
                 {
                     DisplayNPCCanvas(false);
-                    closestNPC = arround[i].GetComponent<NPCSystem>();
+                    targetNPC = arround[i].GetComponent<NPCSystem>();
                 }
             }
 
@@ -46,10 +46,10 @@ public class NPCChecker : MonoBehaviour
         }
         else
         {
-            if (closestNPC != null)
+            if (targetNPC != null)
                 DisplayNPCCanvas(false);
 
-            closestNPC = null;
+            targetNPC = null;
         }
     }
 

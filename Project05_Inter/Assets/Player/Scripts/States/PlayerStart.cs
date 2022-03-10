@@ -10,7 +10,7 @@ public class PlayerStart : PlayerState
 
     public override IEnumerator Start()
     {
-        WaitForSeconds s = new WaitForSeconds(2f);
+        WaitForSeconds s = new WaitForSeconds(.5f);
 
         yield return s;
 

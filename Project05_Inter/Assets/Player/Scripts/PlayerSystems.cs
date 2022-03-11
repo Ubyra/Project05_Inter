@@ -101,33 +101,39 @@ public class PlayerSystems : PlayerStateMachine
 
     public void DialogueController()
     {
-        if (atualText == -1)
+        if(npcChecker.targetNPC.interactionState == 0)
         {
-            npcChecker.targetNPC.StopMove();
-            npcChecker.targetNPC.isTalking = true;
-
-            atualText = 0;
-            interfaceManager.dialogueText.text = npcChecker.targetNPC.configs.firstDialogueOption[atualText];
-            interfaceManager.dialogueName.text = npcChecker.targetNPC.configs.npcName;
-            Dialogue(true);
-        }
-        else
-        {
-            atualText += 1;
-
-            if (atualText < npcChecker.targetNPC.configs.firstDialogueOption.Length)
+            if (atualText == -1)
             {
+                npcChecker.targetNPC.StopMove();
+                npcChecker.targetNPC.isTalking = true;
+
+                atualText = 0;
                 interfaceManager.dialogueText.text = npcChecker.targetNPC.configs.firstDialogueOption[atualText];
+                interfaceManager.dialogueName.text = npcChecker.targetNPC.configs.npcName;
+                Dialogue(true);
             }
             else
             {
-                if (atualInteractedNPC != null)
-                    atualInteractedNPC.GetComponent<NPC_System>().isTalking = false;
+                atualText += 1;
 
-                atualText = -1;
-
-                Dialogue(false);
+                if (atualText < npcChecker.targetNPC.configs.firstDialogueOption.Length)
+                {
+                    interfaceManager.dialogueText.text = npcChecker.targetNPC.configs.firstDialogueOption[atualText];
+                }
+                else
+                {
+                    npcChecker.targetNPC.isTalking = false;
+                    atualText = -1;
+                    npcChecker.targetNPC.interactionState = 1;
+                    npcChecker.targetNPC.canvasManager.UpdateDisplay();
+                    Dialogue(false);
+                }
             }
+        }
+        else if (npcChecker.targetNPC.interactionState == 1)
+        {
+            npcChecker.targetNPC.SetState(new NPC_Dead(npcChecker.targetNPC));
         }
     }
 }

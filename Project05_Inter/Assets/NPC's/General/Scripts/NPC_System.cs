@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class NPC_System : NPC_StateMachine
 {
     [Header("NPC Atributes")]
+    public int interactionState;
     public GameObject interactionCanvas;
     public NPC_Configs configs;
+    public NPC_CanvasManager canvasManager;
     public Rigidbody rb;
     private MeshRenderer myMaterial;
 
@@ -75,7 +77,7 @@ public class NPC_System : NPC_StateMachine
                 {
                     if (isWaiting == false)
                         timeWaitingCounter = timeWaiting + Random.Range(-timeWaitingRange, timeWaitingRange);
-                    SetState(new NPC_Wait(this));
+                    State.Stop();
                     isWaiting = true;
                 }
             }
@@ -96,7 +98,7 @@ public class NPC_System : NPC_StateMachine
     {
         if (isWaiting == false)
             timeWaitingCounter = timeWaiting + Random.Range(-timeWaitingRange, timeWaitingRange);
-        SetState(new NPC_Wait(this));
+        State.Stop();
         isWaiting = true;
     }
 

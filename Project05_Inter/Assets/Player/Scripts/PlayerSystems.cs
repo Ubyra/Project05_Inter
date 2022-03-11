@@ -6,7 +6,7 @@ public class PlayerSystems : PlayerStateMachine
 {
     [Header("Player Atributes")]
     public Rigidbody rb;
-    public NPCChecker npcChecker;
+    public PlayerNPCChecker npcChecker;
     public UiElementsManager interfaceManager;
     public GameObject atualInteractedNPC;
     public int atualText = -1;
@@ -31,7 +31,15 @@ public class PlayerSystems : PlayerStateMachine
         if (npcChecker.targetNPC != null)
         {
             if (npcChecker.targetNPC.gameObject != atualInteractedNPC)
+            {
+                atualText = -1;
+                interfaceManager.dialogueText.text = "";
+
+                if (atualInteractedNPC != null)
+                    atualInteractedNPC.GetComponent<NPC_System>().isTalking = false;
+
                 Dialogue(false);
+            }
 
             if (Input.GetKeyDown(KeyCode.G))
             {
@@ -41,7 +49,12 @@ public class PlayerSystems : PlayerStateMachine
         }
         else
         {
+            atualText = -1;
             interfaceManager.dialogueText.text = "";
+
+            if(atualInteractedNPC != null)
+                atualInteractedNPC.GetComponent<NPC_System>().isTalking = false;
+
             Dialogue(false);
         }
 
@@ -59,8 +72,10 @@ public class PlayerSystems : PlayerStateMachine
 
         if (inputDirection.magnitude >= 0.1f)
         {
-            //float targetAngle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            //transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            Vector3 angle = (transform.position + direction) - transform.position;
+            Quaternion rotation = Quaternion.Euler(0f, angle.y, 0f);
+
+            transform.rotation = rotation;
 
             State.Move();
         }
@@ -88,6 +103,9 @@ public class PlayerSystems : PlayerStateMachine
     {
         if (atualText == -1)
         {
+            npcChecker.targetNPC.StopMove();
+            npcChecker.targetNPC.isTalking = true;
+
             atualText = 0;
             interfaceManager.dialogueText.text = npcChecker.targetNPC.configs.firstDialogueOption[atualText];
             interfaceManager.dialogueName.text = npcChecker.targetNPC.configs.npcName;
@@ -96,13 +114,18 @@ public class PlayerSystems : PlayerStateMachine
         else
         {
             atualText += 1;
+
             if (atualText < npcChecker.targetNPC.configs.firstDialogueOption.Length)
             {
                 interfaceManager.dialogueText.text = npcChecker.targetNPC.configs.firstDialogueOption[atualText];
             }
             else
             {
+                if (atualInteractedNPC != null)
+                    atualInteractedNPC.GetComponent<NPC_System>().isTalking = false;
+
                 atualText = -1;
+
                 Dialogue(false);
             }
         }

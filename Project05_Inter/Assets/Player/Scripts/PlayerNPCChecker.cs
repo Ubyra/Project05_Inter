@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCChecker : MonoBehaviour
+public class PlayerNPCChecker : MonoBehaviour
 {
     public float radiusCheck;
     public LayerMask NPCLayer;
-    public NPCSystem targetNPC;
+    public NPC_System targetNPC;
 
     private void Update()
     {
@@ -32,13 +32,13 @@ public class NPCChecker : MonoBehaviour
             {
                 if (targetNPC == null)
                 {
-                    targetNPC = arround[i].GetComponent<NPCSystem>();
+                    targetNPC = arround[i].GetComponent<NPC_System>();
                 }
 
                 if (Vector3.Distance(transform.position, arround[i].transform.position) < Vector3.Distance(transform.position, targetNPC.transform.position))
                 {
                     DisplayNPCCanvas(false);
-                    targetNPC = arround[i].GetComponent<NPCSystem>();
+                    targetNPC = arround[i].GetComponent<NPC_System>();
                 }
             }
 

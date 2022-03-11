@@ -524,7 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.1
+      value: 5.41
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.y
@@ -532,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.2
+      value: 2.15
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalRotation.w
@@ -566,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156764170067467194, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1156764170287536484, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: configs
       value: 
@@ -574,6 +578,14 @@ PrefabInstance:
       propertyPath: configs
       value: 
       objectReference: {fileID: 11400000, guid: 4eeacb41bcdc1584da53d0bb044dcde3, type: 2}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaiting
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaitingRange
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
 --- !u!1 &552728111
@@ -686,7 +698,7 @@ GameObject:
   - component: {fileID: 689390925}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -849,6 +861,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156764170067467194, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1156764170287536484, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: configs
       value: 
@@ -857,6 +873,14 @@ PrefabInstance:
       propertyPath: configs
       value: 
       objectReference: {fileID: 11400000, guid: 78ed8743641d97d44aef92c7a7f0340d, type: 2}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaiting
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaitingRange
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
 --- !u!1 &972940722
@@ -938,7 +962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.62
+      value: -9.65
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.y
@@ -946,7 +970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.35
+      value: -5.39
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalRotation.w
@@ -980,6 +1004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156764170067467194, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1156764170287536484, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: configs
       value: 
@@ -988,6 +1016,14 @@ PrefabInstance:
       propertyPath: configs
       value: 
       objectReference: {fileID: 11400000, guid: d26e1ebae8fe6fd4f867e3f08aa1921c, type: 2}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaiting
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaitingRange
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
 --- !u!1 &1196790450
@@ -1255,6 +1291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156764170067467194, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1156764170287536484, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: configs
       value: 
@@ -1263,6 +1303,14 @@ PrefabInstance:
       propertyPath: configs
       value: 
       objectReference: {fileID: 11400000, guid: b9750ddc7f9e787468dc6b6afbf26c8b, type: 2}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaiting
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaitingRange
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
 --- !u!1 &1348859435
@@ -1308,7 +1356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9677447a99241c3408c4abeaaf7da31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusCheck: 5
+  radiusCheck: 3
   NPCLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1621,7 +1669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.76
+      value: 6.01
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1629,7 +1677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.11
+      value: -4.44
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1663,6 +1711,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156764170067467194, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1156764170287536484, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: configs
       value: 
@@ -1671,6 +1723,14 @@ PrefabInstance:
       propertyPath: configs
       value: 
       objectReference: {fileID: 11400000, guid: 0cc89e2304650bd48a813db9881eb94d, type: 2}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaiting
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaitingRange
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
 --- !u!1 &2027642510
@@ -1944,13 +2004,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 608334720166610907, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: m_Drag
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 608334720166610907, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.75
+      value: -6.16
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1958,7 +2026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.14
+      value: 5.27
       objectReference: {fileID: 0}
     - target: {fileID: 1156764170067467076, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2000,5 +2068,13 @@ PrefabInstance:
       propertyPath: configs
       value: 
       objectReference: {fileID: 11400000, guid: d1c087ef1c6820d4695ae77a6c666b22, type: 2}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaiting
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416562162453866586, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}
+      propertyPath: timeWaitingRange
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9d59f7e52a60849a80bd578b994a32, type: 3}

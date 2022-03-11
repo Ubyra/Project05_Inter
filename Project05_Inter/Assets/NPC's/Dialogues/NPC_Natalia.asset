@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93ec7dc3ab25f54d9ce1f208c931c08, type: 3}
+  m_Script: {fileID: 11500000, guid: 574aea040fe31d94ba139ff217dac059, type: 3}
   m_Name: NPC_Natalia
   m_EditorClassIdentifier: 
   npcName: Natalia
   npcMaterial: {fileID: 2100000, guid: efe26027cacc84b409062a6cff9b90c4, type: 2}
+  walk: 1
   firstDialogueOption:
   - Brusa!
   secondDialogueOption: []

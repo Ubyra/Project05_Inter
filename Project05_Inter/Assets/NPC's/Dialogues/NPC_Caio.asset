@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93ec7dc3ab25f54d9ce1f208c931c08, type: 3}
+  m_Script: {fileID: 11500000, guid: 574aea040fe31d94ba139ff217dac059, type: 3}
   m_Name: NPC_Caio
   m_EditorClassIdentifier: 
   npcName: Caio
   npcMaterial: {fileID: 2100000, guid: aa60dc0f504f8eb41974f50e1528f594, type: 2}
+  walk: 1
   firstDialogueOption:
   - Fala ae mano!
   secondDialogueOption: []

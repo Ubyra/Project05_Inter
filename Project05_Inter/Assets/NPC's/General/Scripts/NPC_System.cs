@@ -109,4 +109,9 @@ public class NPC_System : NPC_StateMachine
             StopMove();
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(startPosition, maxDistanceRadiusToWalk);
+    }
 }

@@ -39,4 +39,14 @@ public abstract class CardState
     {
         yield break;
     }
+
+    public virtual IEnumerator GoBackToHand()
+    {
+        yield break;
+    }
+
+    public virtual IEnumerator ShowCards()
+    {
+        yield break;
+    }
 }

@@ -5,8 +5,10 @@ using UnityEngine;
 public class MatchSystem : MatchStateMachine
 {
     [Header("Other Scripts Access")]
-    public CameraSystem camSystem;
-    public Transform selectedCard;
+    public CameraSystem _camSystem;
+    public Transform _selectedCardReference;
+    public CardSystem _cardSelected;
+    public PlayerHand _playerHand;
 
     [Header("Match Atributes")]
     public int turn;
@@ -15,5 +17,17 @@ public class MatchSystem : MatchStateMachine
     private void Start()
     {
         SetState(new Match_Start(this));
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StartCoroutine(State.ShowCards());
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            StartCoroutine(State.ShowBoard());
+        }
     }
 }

@@ -8,19 +8,15 @@ public class CardSystem : CardStateMachine
     public Collider colisor;
     public GameObject cardModel;
     public MatchSystem matchSystem;
+    public IHighlightSelection _highLight;
 
     [Header("Card Configs")]
     public CardConfig cardConfig;
-
-    [Header("Card Sizer")]
-    [Range(1, 2)] public float scaleFactor;
     public bool IsMouseColliding => MouseSelector.HitCollider() == colisor;
-    private Vector3 newScale;
 
     [Header("Card Start Atributes")]
     public Vector3 startPosition;
     public Quaternion startRotation;
-    public Vector3 startScale;
 
     private Vector3 atualPosition;
     private Quaternion atualRotation;
@@ -33,15 +29,21 @@ public class CardSystem : CardStateMachine
     private Vector3 desiredPosition;
     private Quaternion desiredRotation;
 
+    private void Awake()
+    {
+        _highLight = GetComponent<IHighlightSelection>();
+    }
+
     private void Start()
     {
         SetState(new Card_Hand(this));
         startPosition = transform.position;
         startRotation = transform.rotation;
-        startScale = cardModel.transform.localScale;
 
         atualPosition = transform.position;
         atualRotation = transform.rotation;
+
+        _highLight.HighlightInitialize(transform);
     }
 
     private void Update()
@@ -89,15 +91,20 @@ public class CardSystem : CardStateMachine
             }
         }
     }
-    
-    public void UpdateNewScale(bool colisor)
+
+    public void ChangeCardSelected()
     {
-        if (colisor)
+        if(matchSystem._cardSelected == null)
         {
-            newScale = startScale * scaleFactor;
-            cardModel.transform.localScale = newScale;
+            matchSystem._cardSelected = this;
+            return;
         }
-        else
-            cardModel.transform.localScale = startScale;
+
+        if(matchSystem._cardSelected != gameObject)
+        {
+            matchSystem._cardSelected.SetState(new Card_Selected(matchSystem._cardSelected));
+            StartCoroutine(matchSystem._cardSelected.State.GoBackToHand());
+            matchSystem._cardSelected = this;
+        }
     }
 }

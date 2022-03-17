@@ -10,7 +10,7 @@ public class Card_Selected : CardState
 
     public override IEnumerator Start()
     {
-        Card.UpdateNewScale(false);
+        Card._highLight.OnDehighlight(Card.transform);
         return base.Start();
     }
 
@@ -30,11 +30,22 @@ public class Card_Selected : CardState
         }
     }
 
+    public override IEnumerator GoBackToHand()
+    {
+        Card.StartCardMovement(Card.startPosition, Card.startRotation);
+
+        yield return new WaitForSeconds(Card.desiredMovementTime);
+
+        Card.SetState(new Card_Hand(Card));
+    }
+
     public override IEnumerator OnCardClick()
     {
         if (!Card.IsMouseColliding && Card.matchSystem.clickedSpot == null)
         {
             Card.StartCardMovement(Card.startPosition, Card.startRotation);
+
+            Card.matchSystem._camSystem.ChangeCamera("Hand");
 
             yield return new WaitForSeconds(Card.desiredMovementTime);
 

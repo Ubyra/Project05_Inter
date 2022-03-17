@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Match_EnemyTurn : MatchState
+public class Match_EnemyTurn : Match_State
 {
     public Match_EnemyTurn(MatchSystem system) : base(system)
     {

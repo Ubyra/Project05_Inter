@@ -15,14 +15,17 @@ public class Card_Hand : CardState
 
     public override void CardOver()
     {
-        Card.UpdateNewScale(Card.IsMouseColliding);
+        if (Card.IsMouseColliding) Card._highLight.OnHighlight(Card.transform);
+        else Card._highLight.OnDehighlight(Card.transform);
     }
 
     public override IEnumerator OnCardClick()
     {
         if (Card.IsMouseColliding)
         {
-            Card.StartCardMovement(Card.matchSystem.selectedCard.position, Card.matchSystem.selectedCard.rotation);
+            Card.ChangeCardSelected();
+            Card.StartCardMovement(Card.matchSystem._selectedCardReference.position, Card.matchSystem._selectedCardReference.rotation);
+            Card.matchSystem._camSystem.ChangeCamera("Selected");
 
             yield return new WaitForSeconds(Card.desiredMovementTime);
 

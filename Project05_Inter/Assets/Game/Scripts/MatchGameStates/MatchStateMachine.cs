@@ -2,10 +2,10 @@ using UnityEngine;
 
 public abstract class MatchStateMachine : MonoBehaviour
 {
-    protected MatchState PreviousState;
-    protected MatchState State;
+    protected Match_State PreviousState;
+    protected Match_State State;
 
-    public void SetState(MatchState state)
+    public void SetState(Match_State state)
     {
         PreviousState = State != null ? State : state;
         State = state;

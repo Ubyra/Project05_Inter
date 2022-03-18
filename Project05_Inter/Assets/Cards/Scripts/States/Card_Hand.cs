@@ -23,7 +23,7 @@ public class Card_Hand : CardState
     {
         if (Card.IsMouseColliding)
         {
-            Card.ChangeCardSelected();
+            Card.ChangeCardSelected(Card.matchSystem._playerHand._selectedCard);
             Card.StartCardMovement(Card.matchSystem._selectedCardReference.position, Card.matchSystem._selectedCardReference.rotation);
             Card.matchSystem._camSystem.ChangeCamera("Selected");
 

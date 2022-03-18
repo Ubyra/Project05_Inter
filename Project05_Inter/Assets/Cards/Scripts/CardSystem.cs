@@ -75,15 +75,16 @@ public class CardSystem : CardStateMachine
 
     public void MovementCard()
     {
+        bool isInDesiredPosition = transform.position == desiredPosition;
+
         if (isInMovement)
         {
             enlapsedTime += Time.deltaTime;
             percentageComplete = enlapsedTime / desiredMovementTime;
 
-            transform.position = Vector3.Lerp(atualPosition, desiredPosition, Mathf.SmoothStep(0, 1, percentageComplete));
-            transform.rotation = Quaternion.Lerp(atualRotation, desiredRotation, Mathf.SmoothStep(0, 1, percentageComplete));
+            transform.SetPositionAndRotation(Vector3.Lerp(atualPosition, desiredPosition, Mathf.SmoothStep(0, 1, percentageComplete)), Quaternion.Lerp(atualRotation, desiredRotation, Mathf.SmoothStep(0, 1, percentageComplete)));
 
-            if (transform.position == desiredPosition)
+            if (isInDesiredPosition)
             {
                 isInMovement = false;
                 desiredPosition = Vector3.zero;
@@ -92,19 +93,22 @@ public class CardSystem : CardStateMachine
         }
     }
 
-    public void ChangeCardSelected()
+    public void ChangeCardSelected(GameObject selectedCard)
     {
-        if(matchSystem._cardSelected == null)
+        var selectedCardGameObject = selectedCard;
+        var selectedCardSystem = selectedCard.GetComponent<CardSystem>();
+
+        if(selectedCardGameObject == null)
         {
-            matchSystem._cardSelected = this;
+            selectedCard = gameObject;
             return;
         }
 
-        if(matchSystem._cardSelected != gameObject)
+        if(selectedCardGameObject != gameObject)
         {
-            matchSystem._cardSelected.SetState(new Card_Selected(matchSystem._cardSelected));
-            StartCoroutine(matchSystem._cardSelected.State.GoBackToHand());
-            matchSystem._cardSelected = this;
+            selectedCardSystem.SetState(new Card_Selected(selectedCardSystem));
+            StartCoroutine(selectedCardSystem.State.GoBackToHand());
+            selectedCard = gameObject;
         }
     }
 }

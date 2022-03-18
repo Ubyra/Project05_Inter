@@ -7,7 +7,7 @@ using TMPro;
 public class CardUiElements : MonoBehaviour
 {
     [Header("External Scripts")]
-    [SerializeField] private CardSystem card;
+    [SerializeField] private CardSystemR card;
 
     [Header("Default Configs")]
     [SerializeField] public Sprite[] suitsSprites;
@@ -26,10 +26,10 @@ public class CardUiElements : MonoBehaviour
 
     public void UpdateElements()
     {
-        number1.text = card.cardConfig.cardValue.ToString();
-        number2.text = card.cardConfig.cardValue.ToString();
+        number1.text = card.Config.cardValue.ToString();
+        number2.text = card.Config.cardValue.ToString();
 
-        switch (card.cardConfig.cardSuit)
+        switch (card.Config.cardSuit)
         {
             default:
             case CardSuits.Clubs:

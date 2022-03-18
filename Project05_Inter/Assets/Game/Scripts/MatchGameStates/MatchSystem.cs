@@ -7,7 +7,6 @@ public class MatchSystem : MatchStateMachine
     [Header("Other Scripts Access")]
     public CameraSystem _camSystem;
     public Transform _selectedCardReference;
-    public CardSystem _cardSelected;
     public PlayerHand _playerHand;
 
     [Header("Match Atributes")]

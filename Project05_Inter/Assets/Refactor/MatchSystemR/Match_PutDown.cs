@@ -10,6 +10,9 @@ public class Match_PutDown : Match_StateR
 
     public override IEnumerator Start()
     {
+        waitTime = new WaitForSeconds(2f);
+        Debug.Log("_Put Down a Card");
+
         System.PlayerHand.canHighlightCard = true;
         System.PlayerHand.canMoveCard = true;
         return base.Start();

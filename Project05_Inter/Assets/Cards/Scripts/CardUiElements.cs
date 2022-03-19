@@ -21,7 +21,7 @@ public class CardUiElements : MonoBehaviour
 
     private void Start()
     {
-        UpdateElements();
+        //UpdateElements();
     }
 
     public void UpdateElements()

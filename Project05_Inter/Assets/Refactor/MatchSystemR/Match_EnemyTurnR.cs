@@ -14,7 +14,7 @@ public class Match_EnemyTurnR : Match_StateR
         Debug.Log("_Enemy Turn");
 
         System.PlayerHand.canHighlightCard = false;
-        System.PlayerHand.canMoveCard = false;
+        //System.PlayerHand.canMoveCard = false;
 
         yield return waitTime;
 

@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+public class PileDeck : MonoBehaviour
 {
     [Header("Deck Essentials")]
-    public CardConfig[] cards;
     public List<CardConfig> deck;
 
     [Header("External Scripts")]
@@ -14,36 +13,12 @@ public class Deck : MonoBehaviour
     public Collider deckCollider;
     public bool IsMouseColliding => MouseSelector.HitCollider() == deckCollider;
 
-    private void Start()
-    {
-        RandomizeDeck();
-    }
-
     private void Update()
     {
-        if(IsMouseColliding && Input.GetMouseButtonDown(0))
+        if (IsMouseColliding && Input.GetMouseButtonDown(0))
         {
             Match.DrawCard();
-        }
-    }
-
-    [ContextMenu("Generate Random Deck")]
-    public void RandomizeDeck()
-    {
-        deck.Clear();
-
-        int randomNumber = (int)Random.Range(0, cards.Length);
-        List<int> numberAlreadySorted = new List<int>();
-
-        while(numberAlreadySorted.Count != cards.Length)
-        {
-            if(!ExistNumberInArray(randomNumber, numberAlreadySorted))
-            {
-                numberAlreadySorted.Add(randomNumber);
-                deck.Add(cards[randomNumber]);
-            }
-            else
-                randomNumber = (int)Random.Range(0, cards.Length);
+            Match.DiscardCard();
         }
     }
 
@@ -56,7 +31,7 @@ public class Deck : MonoBehaviour
     {
         for (int i = 0; i < array.Count; i++)
         {
-            if(number == array[i])
+            if (number == array[i])
             {
                 return true;
             }
@@ -72,5 +47,4 @@ public class Deck : MonoBehaviour
 
         return cardDrawed;
     }
-
 }

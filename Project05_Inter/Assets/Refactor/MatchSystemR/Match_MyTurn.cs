@@ -17,9 +17,13 @@ public class Match_MyTurn : Match_StateR
         //System.PlayerHand.canMoveCard = false;
 
         yield return waitTime;
+    }
 
-        // Draw the card;
-        Debug.Log("_I Draw a card");
+    public override IEnumerator DrawCard()
+    {
+        waitTime = new WaitForSeconds(0.6f);
+
+        System.PlayerHand.DrawCard(System.PlayerHand.CurrentCardsInHand);
 
         yield return waitTime;
 

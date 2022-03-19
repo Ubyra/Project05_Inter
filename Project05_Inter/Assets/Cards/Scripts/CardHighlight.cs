@@ -8,6 +8,7 @@ public class CardHighlight : MonoBehaviour, IHighlightSelection
     public Vector3 startScale;
     private Vector3 newScale;
     private bool isHighlighed;
+    public Canvas Layer;
 
     public void HighlightInitialize(Transform selection)
     {
@@ -18,7 +19,11 @@ public class CardHighlight : MonoBehaviour, IHighlightSelection
     {
         newScale = startScale * scaleFactor;
 
-        if(!isHighlighed) selection.transform.localScale = newScale;
+        if (!isHighlighed)
+        {
+            Layer.sortingOrder = 1;
+            selection.transform.localScale = newScale;
+        }
         isHighlighed = true;
     }
 
@@ -26,7 +31,11 @@ public class CardHighlight : MonoBehaviour, IHighlightSelection
     {
         newScale = startScale;
 
-        if(isHighlighed) selection.transform.localScale = newScale;
+        if (isHighlighed)
+        {
+            Layer.sortingOrder = 0;
+            selection.transform.localScale = newScale;
+        }
         isHighlighed = false;
     }
 }

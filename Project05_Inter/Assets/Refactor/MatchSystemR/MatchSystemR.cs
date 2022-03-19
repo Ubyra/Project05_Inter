@@ -14,4 +14,22 @@ public class MatchSystemR : Match_StateMachineR
     {
         SetState(new Match_StartR(this));
     }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(State.SelectCard());
+        }
+    }
+
+    public void DiscardCard()
+    {
+        StartCoroutine(State.Discard());
+    }
+
+    public void DrawCard()
+    {
+        StartCoroutine(State.DrawCard());
+    }
 }

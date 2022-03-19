@@ -6,6 +6,7 @@ public class CardSystemR : Card_StateMachineR
 {
     [Header("Card Config")]
     public CardConfig Config;
+    public CardUiElements UIElements;
 
     [Header("External Scripts")]
     public Collider cardCollider;
@@ -17,12 +18,18 @@ public class CardSystemR : Card_StateMachineR
     public Quaternion startRotation;
     private Vector3 atualPosition;
     private Quaternion atualRotation;
+    private Vector3 beforeSelectPosition;
+    private Quaternion beforeSelectRotation;
+    public bool Select { get; set; }
+    public bool UnSelect { get; set; }
+    public bool IsSelected { get; set; }
+
 
     [Header("Card Movement Atributes")]
     public float desiredMovementTime;
+    public bool IsInMovement { get; private set; }
     private float enlapsedTime;
     private float percentageComplete;
-    private bool isInMovement = false;
     private Vector3 desiredPosition;
     private Quaternion desiredRotation;
 
@@ -37,9 +44,25 @@ public class CardSystemR : Card_StateMachineR
         highlightSelection.HighlightInitialize(transform);
     }
 
+    private void Update()
+    {
+        if (Select)
+        {
+            beforeSelectPosition = transform.position;
+            beforeSelectRotation = transform.rotation;
+
+            Select = false;
+        }
+        if (UnSelect)
+        {
+            StartCardMovement(beforeSelectPosition, beforeSelectRotation, 0.3f);
+            UnSelect = false;
+        }
+    }
+
     public void CardHighlight()
     {
-        if (IsMouseOver)
+        if (IsMouseOver && !IsSelected)
             highlightSelection.OnHighlight(transform);
         else
             highlightSelection.OnDehighlight(transform);
@@ -54,7 +77,7 @@ public class CardSystemR : Card_StateMachineR
         desiredRotation = rotation;
         desiredMovementTime = movementTime;
 
-        isInMovement = true;
+        IsInMovement = true;
         enlapsedTime = 0;
     }
 
@@ -62,7 +85,7 @@ public class CardSystemR : Card_StateMachineR
     {
         bool isInDesiredPosition = transform.position == desiredPosition;
 
-        if (isInMovement)
+        if (IsInMovement)
         {
             enlapsedTime += Time.deltaTime;
             percentageComplete = enlapsedTime / desiredMovementTime;
@@ -71,7 +94,7 @@ public class CardSystemR : Card_StateMachineR
 
             if (isInDesiredPosition)
             {
-                isInMovement = false;
+                IsInMovement = false;
                 desiredPosition = Vector3.zero;
                 desiredRotation = Quaternion.Euler(Vector3.zero);
             }

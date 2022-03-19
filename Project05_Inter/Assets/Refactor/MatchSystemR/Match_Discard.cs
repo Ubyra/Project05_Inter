@@ -10,8 +10,12 @@ public class Match_Discard : Match_StateR
 
     public override IEnumerator Start()
     {
+        waitTime = new WaitForSeconds(2f);
+        Debug.Log("_Discard");
+
         System.PlayerHand.canHighlightCard = true;
         System.PlayerHand.canMoveCard = true;
+
         return base.Start();
     }
 
@@ -19,7 +23,7 @@ public class Match_Discard : Match_StateR
     {
         waitTime = new WaitForSeconds(2f);
 
-        // Card is Selected ? Animation to Select : Animation to Hand;
+        System.PlayerHand.SelectCard();
 
         yield return waitTime;
     }
@@ -29,8 +33,7 @@ public class Match_Discard : Match_StateR
         waitTime = new WaitForSeconds(2f);
 
         System.PlayerHand.canHighlightCard = false;
-        //System.PlayerHand.canMoveCard = false;
-        // Discard the card;
+        System.DiscardCard();
 
         yield return waitTime;
 

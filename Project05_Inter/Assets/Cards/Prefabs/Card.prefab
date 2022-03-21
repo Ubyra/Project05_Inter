@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1918572253458069032}
-  - component: {fileID: 58919838202490036}
   - component: {fileID: 5894967333581316236}
+  - component: {fileID: 1726281694}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -35,25 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -20, y: 0, z: 0}
---- !u!114 &58919838202490036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1918572253458069044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecbc8b61f2c620e488509c82bed2f2e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colisor: {fileID: 5380554256125614527}
-  cardModel: {fileID: 4792024237254935053}
-  matchSystem: {fileID: 0}
-  cardConfig: {fileID: 0}
-  startPosition: {x: 0, y: 0, z: 0}
-  startRotation: {x: 0, y: 0, z: 0, w: 0}
-  desiredMovementTime: 0
 --- !u!114 &5894967333581316236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +49,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleFactor: 1.5
   startScale: {x: 0, y: 0, z: 0}
+  Layer: {fileID: 2137141440911478922}
+--- !u!114 &1726281694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918572253458069044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f9eeb52a1e66344c97ac678b94c72d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Config: {fileID: 0}
+  UIElements: {fileID: 488932843903827505}
+  cardCollider: {fileID: 5380554256125614527}
+  startPosition: {x: 0, y: 0, z: 0}
+  startRotation: {x: 0, y: 0, z: 0, w: 0}
+  desiredMovementTime: 0.3
 --- !u!1 &3851634288195116768
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3851634288195116768}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.01, z: 1.2}
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4647f0393a21d74d89ef15d4a5ad175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 58919838202490036}
+  card: {fileID: 1726281694}
   suitsSprites:
   - {fileID: -6949248038052967795, guid: 780a4ee1c2f13d34d8f24b327ffa5120, type: 3}
   - {fileID: 8024917786540317405, guid: 780a4ee1c2f13d34d8f24b327ffa5120, type: 3}

@@ -6,7 +6,9 @@ public class PlayerHand : MonoBehaviour
 {
     public Deck deck;
     public CardSystemR[] card;
+    public List<CardSystemR> cardsInHand;
     public Transform selectedCardPosition;
+    public MatchSystemR matchSystem;
     public CardSystemR _selectedCard;
     private Transform selectedCardCurrentTransform;
     private int selectedCardIndex;
@@ -75,6 +77,17 @@ public class PlayerHand : MonoBehaviour
         CurrentCardsInHand += 1;
     }
 
+    public void Discard()
+    {
+        var DiscardedCard = _selectedCard;
+
+        _selectedCard.UnSelect = false;
+        _selectedCard.IsSelected = false;
+        _selectedCard = null;
+
+        DiscardedCard.StartCardMovement(matchSystem.spots[matchSystem.Round].transform.position, matchSystem.spots[matchSystem.Round].transform.rotation, 0.3f);
+    }
+
     public void GetCards()
     {
         card = GetComponentsInChildren<CardSystemR>();
@@ -118,7 +131,8 @@ public class PlayerHand : MonoBehaviour
         {
             var position = new Vector3(xPos, 0f + transform.position.y, 0f + transform.position.z);
 
-            card[i].StartCardMovement(position, Quaternion.Euler(new Vector3(-20f, 0f, 0f)), 0.3f);
+            if(card[i].Config != null)
+                card[i].StartCardMovement(position, Quaternion.Euler(new Vector3(-20f, 0f, 0f)), 0.3f);
 
             xPos += 0.75f;
         }
@@ -138,7 +152,8 @@ public class PlayerHand : MonoBehaviour
         {
             var position = new Vector3(xPos, 0f + transform.position.y, 0f + transform.position.z);
 
-            cardPositions.Add(position);
+            if (card[i].Config != null)
+                cardPositions.Add(position);
 
             xPos += 0.75f;
         }

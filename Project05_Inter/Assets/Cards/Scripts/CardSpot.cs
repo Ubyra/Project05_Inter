@@ -9,13 +9,13 @@ public class CardSpot : MonoBehaviour
     public Collider col;
     public Transform modelTransform;
 
-    public MatchSystem matchSystem;
+    public MatchSystemR matchSystem;
 
     private void Update()
     {
         if(MouseSelector.HitCollider() == col && Input.GetMouseButton(0))
         {
-            matchSystem.clickedSpot = this;
+            //matchSystem.clickedSpot = this;
         }
     }
 }

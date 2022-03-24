@@ -4,27 +4,29 @@ using UnityEngine;
 
 public class PlayerHand : MonoBehaviour
 {
-    public Deck deck;
-    public CardSystemR[] card;
-    public List<CardSystemR> cardsInHand;
+    [Header("External References")]
+    public MainDeck deck;
+    public CardSystemR[] cardPool;
     public Transform selectedCardPosition;
     public MatchSystemR matchSystem;
-    public CardSystemR _selectedCard;
-    private Transform selectedCardCurrentTransform;
-    private int selectedCardIndex;
-    public bool randomizeCards;
 
+    [Header("Player Hand")]
+    public List<CardSystemR> cardsInHand;
+    public CardConfig[] configs;
+    public CardSystemR _selectedCard;
     public int initialCardInHand;
     public int CurrentCardsInHand { get; private set; }
 
-    public CardConfig[] configs;
+    [Header("Other Configs")]
     public bool canMoveCard = true;
     public bool canHighlightCard = false;
     private List<Vector3> cardPositions;
 
+    #region Métodos Default
+
     private void Awake()
     {
-        GetCards();
+        GetCardPool();
     }
 
     private void Start()
@@ -37,6 +39,20 @@ public class PlayerHand : MonoBehaviour
     {
         CardHighlight();
         CardMovements();
+    }
+
+    #endregion
+
+    #region Métodos de Seleção
+
+    public void GetCardPool()
+    {
+        cardPool = GetComponentsInChildren<CardSystemR>();
+
+        for (int i = 0; i < cardPool.Length; i++)
+        {
+            cardPool[i].cardCollider.enabled = false;
+        }
     }
 
     public void SelectCard()
@@ -66,10 +82,87 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Métodos de Atualização
+
+    public void CardHighlight()
+    {
+        if (canHighlightCard)
+        {
+            foreach (CardSystemR c in cardPool)
+            {
+                c.CardHighlight();
+            }
+        }
+    }
+
+    public void CardMovements()
+    {
+        if (canMoveCard)
+        {
+            foreach (CardSystemR c in cardPool)
+            {
+                c.MovementCard();
+            }
+        }
+    }
+
+    [ContextMenu("Update Cards In their Own Position")]
+    public void UpdateCardsPositions()
+    {
+        float totalSpace = (0.8f * CurrentCardsInHand);
+        float firstPosition = -(totalSpace / 2);
+        float xPos = firstPosition;
+
+        for (int i = 0; i < CurrentCardsInHand + 1; i++)
+        {
+            var position = new Vector3(xPos, 0f + transform.position.y, 0f + transform.position.z);
+
+            if (cardPool[i].Config != null)
+                cardPool[i].StartCardMovement(position, Quaternion.Euler(new Vector3(-20f, 0f, 0f)), 0.3f);
+
+            xPos += 0.75f;
+        }
+    }
+
+    public void UpdateVectors()
+    {
+
+        if (cardPositions.Count > 0)
+            cardPositions.Clear();
+
+        float totalSpace = (0.8f * CurrentCardsInHand);
+        float firstPosition = -(totalSpace / 2);
+        float xPos = firstPosition;
+
+        for (int i = 0; i < CurrentCardsInHand + 1; i++)
+        {
+            var position = new Vector3(xPos, 0f + transform.position.y, 0f + transform.position.z);
+
+            if (cardPool[i].Config != null)
+                cardPositions.Add(position);
+
+            xPos += 0.75f;
+        }
+    }
+
+    public void UpdateThisCardPosition(int index)
+    {
+        UpdateVectors();
+
+        cardPool[index].StartCardMovement(cardPositions[index], Quaternion.Euler(new Vector3(-20f, 0f, 0f)), 0.3f);
+        cardPool[index].cardCollider.enabled = true;
+    }
+
+    #endregion
+
+    #region Métodos de Ação
+
     public void DrawCard(int index)
     {
-        card[index].Config = deck.NextCardToDraw();
-        card[index].UIElements.UpdateElements();
+        cardPool[index].Config = deck.NextCardToDraw();
+        cardPool[index].UIElements.UpdateElements();
 
         UpdateCardsPositions();
         UpdateThisCardPosition(index);
@@ -87,83 +180,5 @@ public class PlayerHand : MonoBehaviour
 
         DiscardedCard.StartCardMovement(matchSystem.spots[matchSystem.Round].transform.position, matchSystem.spots[matchSystem.Round].transform.rotation, 0.3f);
     }
-
-    public void GetCards()
-    {
-        card = GetComponentsInChildren<CardSystemR>();
-
-        for (int i = 0; i < card.Length; i++)
-        {
-            card[i].cardCollider.enabled = false;
-        }
-    }
-
-    public void CardHighlight()
-    {
-        if (canHighlightCard)
-        {
-            foreach(CardSystemR c in card)
-            {
-                c.CardHighlight();
-            }
-        }
-    }
-
-    public void CardMovements()
-    {
-        if (canMoveCard)
-        {
-            foreach (CardSystemR c in card)
-            {
-                c.MovementCard();
-            }
-        }
-    }
-
-    [ContextMenu("Update Cards In their Own Position")]
-    public void UpdateCardsPositions()
-    {
-        float totalSpace = (0.8f * CurrentCardsInHand);
-        float firstPosition = - (totalSpace / 2);
-        float xPos = firstPosition;
-
-        for (int i = 0; i < CurrentCardsInHand + 1; i++)
-        {
-            var position = new Vector3(xPos, 0f + transform.position.y, 0f + transform.position.z);
-
-            if(card[i].Config != null)
-                card[i].StartCardMovement(position, Quaternion.Euler(new Vector3(-20f, 0f, 0f)), 0.3f);
-
-            xPos += 0.75f;
-        }
-    }
-
-    public void UpdateVectors()
-    {
-
-        if (cardPositions.Count > 0)
-            cardPositions.Clear();
-       
-        float totalSpace = (0.8f * CurrentCardsInHand);
-        float firstPosition = -(totalSpace / 2);
-        float xPos = firstPosition;
-
-        for (int i = 0; i < CurrentCardsInHand + 1; i++)
-        {
-            var position = new Vector3(xPos, 0f + transform.position.y, 0f + transform.position.z);
-
-            if (card[i].Config != null)
-                cardPositions.Add(position);
-
-            xPos += 0.75f;
-        }
-    }
-
-    public void UpdateThisCardPosition(int index)
-    {
-        UpdateVectors();
-
-        card[index].StartCardMovement(cardPositions[index], Quaternion.Euler(new Vector3(-20f, 0f, 0f)), 0.3f);
-        card[index].cardCollider.enabled = true;
-    }
+    #endregion
 }

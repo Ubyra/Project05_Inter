@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ef8c58358dcd8b44b03cb5b2304ef78, type: 3}
-  m_Name: Card_Fool_Hearts
+  m_Name: Card_Diamonds_Grim
   m_EditorClassIdentifier: 
-  cardName: Fool
+  cardName: Grim
   cardDescription: 
   cardImage: {fileID: 0}
-  cardValue: 5
-  cardSuit: 2
+  cardValue: 1
+  cardSuit: 1
   effects: {fileID: 0}

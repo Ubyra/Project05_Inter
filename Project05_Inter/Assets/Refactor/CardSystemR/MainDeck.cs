@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+public class MainDeck : MonoBehaviour
 {
     [Header("Deck Essentials")]
     public CardConfig[] cards;

@@ -9,7 +9,7 @@ public class CardSpot : MonoBehaviour
     public Collider col;
     public Transform modelTransform;
 
-    public MatchSystemR matchSystem;
+    public MatchSystem matchSystem;
 
     private void Update()
     {

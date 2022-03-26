@@ -1,15 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
-public class DiscardDeck : Deck
+public class MainDeck : Deck
 {
     #region Métodos iniciais
+
     private void Awake()
     {
         areaCollider = GetComponent<Collider>();
     }
+
+    private void Start()
+    {
+        Card = new List<GameObject>();
+        Shuffle();
+    }
+
+    private void Update()
+    {
+        
+    }
+
     #endregion
 
     #region Métodos override
@@ -43,11 +55,7 @@ public class DiscardDeck : Deck
     {
         string debug = "";
 
-        if(Card.Count <= 0)
-        {
-            debug += "- Need Fiil the Deck. Start filling the deck \n";
-            FillDeck();
-        }
+        FillDeck();
 
         List<CardSystem> currentCardConfigs = new List<CardSystem>();
         List<CardConfig> newOrder = new List<CardConfig>();
@@ -86,14 +94,10 @@ public class DiscardDeck : Deck
 
     public override void DrawCard(Transform t)
     {
-        bool mouseClick = Input.GetMouseButtonDown(0) && MouseSelector.HitCollider() == areaCollider;
+        Transform child = transform.GetChild(0);
 
-        if (mouseClick)
-        {
-            Transform child = transform.GetChild(0);
-
-            child.SetParent(t, false);
-        }
+        child.SetParent(t, true);
+        Card.Remove(Card[0]);
     }
 
     public override void ReturnCard(GameObject c)
@@ -132,6 +136,16 @@ public class DiscardDeck : Deck
         debug += "-- Fill Deck Configs Complete \n";
         debug += "[Deck Configs Filled] \n";
         Debug.Log(debug);
+
+        UpdateUiElements();
+    }
+
+    private void UpdateUiElements()
+    {
+        foreach (GameObject g in Card)
+        {
+            g.GetComponent<CardSystem>().UIElements.UpdateElements();
+        }
     }
 
     private bool ExistNumberInArray(int number, List<int> array)

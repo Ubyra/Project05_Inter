@@ -4,7 +4,11 @@ using UnityEngine;
 
 public abstract class Deck : MonoBehaviour
 {
+    public Transform playerHand;
+    public Transform enemyHand;
+    public Collider areaCollider;
     public List<GameObject> Card;
+    public GameObject TopCard{ get { return Card[0]; } }
 
     public virtual void FillDeck()
     {

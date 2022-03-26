@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Card_StateR
+public abstract class MatchState
 {
-    protected CardSystem System;
+    protected MatchSystem System;
     protected WaitForSeconds waitTime;
 
-    public Card_StateR(CardSystem system)
+    public MatchState(MatchSystem system)
     {
         System = system;
     }
@@ -22,7 +22,7 @@ public abstract class Card_StateR
         yield break;
     }
 
-    public virtual IEnumerator DrawCard()
+    public virtual IEnumerator DrawCard(Deck deck)
     {
         yield break;
     }
@@ -40,5 +40,10 @@ public abstract class Card_StateR
     public virtual IEnumerator PutCard()
     {
         yield break;
+    }
+
+    public virtual void CardOverlaySelection()
+    {
+
     }
 }

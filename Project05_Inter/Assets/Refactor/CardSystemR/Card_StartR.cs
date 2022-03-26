@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Card_StartR : Card_StateR
 {
-    public Card_StartR(CardSystemR system) : base(system)
+    public Card_StartR(CardSystem system) : base(system)
     {
     }
 }

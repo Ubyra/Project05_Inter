@@ -7,7 +7,7 @@ using TMPro;
 public class CardUiElements : MonoBehaviour
 {
     [Header("External Scripts")]
-    [SerializeField] private CardSystemR card;
+    [SerializeField] private CardSystem card;
 
     [Header("Default Configs")]
     [SerializeField] public Sprite[] suitsSprites;

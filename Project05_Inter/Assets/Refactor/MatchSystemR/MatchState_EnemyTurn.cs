@@ -10,23 +10,26 @@ public class MatchState_EnemyTurn : MatchState
 
     public override IEnumerator Start()
     {
-        waitTime = new WaitForSeconds(2);
+        waitTime = new WaitForSeconds(0.9f);
         Debug.Log("_Enemy Turn");
 
         yield return waitTime;
 
         // Enemy Draw's a card;
+        Debug.Log("_Enemy Draws a card");
         System.EnemyHand.DrawCard(System.MainDeck);
 
         yield return waitTime;
 
         // Enemy Discard's a card;
-        System.EnemyHand.DiscardCard(System.EnemyHand.CardsInHand[0], System.DiscardDeck.transform);
+        Debug.Log("_Enemy Discard a card");
+        System.EnemyHand.DiscardCard(Random.Range(0, System.EnemyHand.CardsInHand.Count - 1), System.DiscardDeck.transform);
 
         yield return waitTime;
 
         // Enemy PutDown a card;
         Debug.Log("_Enemy Put Down a Card");
+        System.EnemyHand.PutCard(Random.Range(0, System.EnemyHand.CardsInHand.Count - 1), System.Board.EnemySpots[System.Turn]);
 
         yield return waitTime;
 

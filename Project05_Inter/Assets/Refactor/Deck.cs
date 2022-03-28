@@ -22,7 +22,11 @@ public abstract class Deck : MonoBehaviour
     {
     }
 
-    public virtual void ReturnCard(GameObject c)
+    public virtual void ReturnCard(GameObject card, Transform position)
+    {
+    }
+
+    public virtual void ReturnAllDiscardDeck(Transform position)
     {
     }
 }

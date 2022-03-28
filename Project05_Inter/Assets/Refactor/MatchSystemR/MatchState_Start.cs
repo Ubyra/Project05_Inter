@@ -10,18 +10,14 @@ public class MatchState_Start : MatchState
 
     public override IEnumerator Start()
     {
-        waitTime = new WaitForSeconds(.5f);
+        waitTime = new WaitForSeconds(.3f);
         Debug.Log("_Match Start_");
 
         System.StartCoroutine(System.PlayerHand.FirstDraw());
         System.StartCoroutine(System.EnemyHand.FirstDraw());
 
-        //bool myTurn = Random.Range(0, 100) < 50;
-        bool myTurn = false;
-
         yield return waitTime;
 
-        if (myTurn) System.SetState(new MatchState_MyTurn(System));
-        else System.SetState(new MatchState_EnemyTurn(System));
+        System.SetState(new MatchState_EnemyTurn(System));
     }
 }

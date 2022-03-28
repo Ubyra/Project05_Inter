@@ -99,22 +99,16 @@ public class PlayerHand : Hand
 
     public override IEnumerator FirstDraw()
     {
-        string debug = "-- Start First Draw \n";
         WaitTime = new WaitForSeconds(.1f);
 
         yield return WaitTime;
 
-        debug += "- Let's draw \n";
         while(CardsInHand.Count < Match.initialDraw)
         {
             DrawCard(MainDeck);
-            debug += "- Draw \n" + CardsInHand[CardsInHand.Count - 1].GetComponent<CardSystem>().Config.cardName + " " + CardsInHand[CardsInHand.Count - 1].GetComponent<CardSystem>().Config.cardSuit.ToString() + "\n";
 
             yield return WaitTime;
         }
-
-        debug += "[Cards Drawed] Expected: " + CardsInHand.Count + "/ Total: " + Match.initialDraw;
-        Debug.Log(debug);
     }
 
     public override void DrawCard(Deck deck)
@@ -126,28 +120,64 @@ public class PlayerHand : Hand
 
     public override void DiscardCard(GameObject card, Transform position)
     {
-        
+        DiscardDeck.Card.Add(card);
+
+        card.transform.SetParent(position, true);
+        CardsInHand.Remove(card);
+
+        UpdateCardPosition();
+
+        DiscardDeck.Card[DiscardDeck.Card.Count - 1].GetComponent<CardSystem>().StartCardMovement(position.position, position.rotation, 0.3f);
+
+        _selectedCard = null;
     }
 
     public override void SelectCard()
     {
-        if (canHighlightCard)
+        var colisor = MouseSelector.HitCollider();
+        var selectedCardSystem = colisor.GetComponentInParent<CardSystem>();
+
+        if (_selectedCard != null)
         {
-            if(_selectedCard == null)
+            _selectedCard.GetComponent<CardSystem>().UnSelect = true;
+            _selectedCard.GetComponent<CardSystem>().IsSelected = false;
+        }
+
+        if (selectedCardSystem != null && selectedCardSystem != _selectedCard)
+        {
+            if (!selectedCardSystem.IsInMovement)
             {
-                for (int i = 0; i < CardsInHand.Count; i++)
-                {
-                    if(MouseSelector.HitCollider() == CardsInHand[i].GetComponent<CardSystem>().cardCollider)
-                    {
-                        CardsInHand[i].GetComponent<CardSystem>().StartCardMovement(_SelectCardPosition.position, _SelectCardPosition.rotation, 0.3f);
-                    }
-                }
+                _selectedCard = selectedCardSystem.gameObject;
+                _selectedCard.GetComponent<CardSystem>().Select = true;
+                _selectedCard.GetComponent<CardSystem>().IsSelected = true;
+                _selectedCard.GetComponent<CardSystem>().StartCardMovement(_SelectCardPosition.position, _SelectCardPosition.rotation, 0.3f);
             }
-            else
-            {
-                UpdateCardPosition(_selectedCard);
-                _selectedCard = null;
-            }
+        }
+        else
+        {
+            _selectedCard = null;
+        }
+    }
+
+    public override void PutCard(GameObject card, CardSpot spot)
+    {
+        spot.ReciveCard(card);
+
+        card.transform.SetParent(spot.transform, true);
+        CardsInHand.Remove(card);
+
+        UpdateCardPosition();
+
+        spot.GetComponentInChildren<CardSystem>().StartCardMovement(spot.modelTransform.position, spot.modelTransform.rotation, 0.3f);
+
+        _selectedCard = null;
+    }
+
+    public override void DiscardAllHand()
+    {
+        foreach (GameObject g in CardsInHand)
+        {
+            DiscardCard(g, DiscardDeck.transform);
         }
     }
     #endregion

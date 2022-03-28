@@ -5,7 +5,8 @@ using UnityEngine;
 public class MatchSystem : MatchSystem_StateMachine
 {
     [Header("External Scripts")]
-    public CardSpot[] spots;
+    public Board Board;
+    public RoundSystem RoundSystem;
     public PlayerHand PlayerHand;
     public EnemyHand EnemyHand;
 
@@ -13,6 +14,7 @@ public class MatchSystem : MatchSystem_StateMachine
     public Deck DiscardDeck;
 
     [SerializeField] public CardSystem SelectedCard { get; private set; }
+    public int Turn { get; private set; }
     public int Round { get; private set; }
 
     public CameraSystem CamSystem;
@@ -22,6 +24,7 @@ public class MatchSystem : MatchSystem_StateMachine
 
     private void Start()
     {
+        Turn = 0;
         Round = 0;
         SetState(new MatchState_Start(this));
     }
@@ -32,7 +35,7 @@ public class MatchSystem : MatchSystem_StateMachine
         {
             var mouseSelection = MouseSelector.HitCollider();
 
-            bool isSelectingCardSpot = mouseSelection == spots[Round].col && PlayerHand._selectedCard != null;
+            bool isSelectingCardSpot = mouseSelection == Board.PlayerSpots[Turn].spotCollider && Board.PlayerSpots[Turn].playerSpot && PlayerHand._selectedCard != null;
             bool isSelectingDiscardSpot = mouseSelection == DiscardDeck.areaCollider;
             bool isSelectingMainDeckSpot = mouseSelection == MainDeck.areaCollider;
 
@@ -49,6 +52,7 @@ public class MatchSystem : MatchSystem_StateMachine
             }
             else if (isSelectingCardSpot)
             {
+                Debug.Log("Try Put card");
                 StartCoroutine(State.PutCard());
             }
             else
@@ -66,5 +70,18 @@ public class MatchSystem : MatchSystem_StateMachine
     public void DrawCard(Deck deck)
     {
         StartCoroutine(State.DrawCard(deck));
+    }
+
+    public void NextTurn()
+    {
+        Turn += 1;
+    }
+
+    public void CheckEndTurn()
+    {
+        if(Turn >= Board.PlayerSpots.Count - 1)
+        {
+            StartCoroutine(RoundSystem.NextRound());
+        }
     }
 }

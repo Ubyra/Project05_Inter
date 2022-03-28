@@ -19,7 +19,6 @@ public class MainDeck : Deck
 
     private void Update()
     {
-        
     }
 
     #endregion
@@ -98,16 +97,6 @@ public class MainDeck : Deck
 
         child.SetParent(t, true);
         Card.Remove(Card[0]);
-    }
-
-    public override void ReturnCard(GameObject c)
-    {
-        bool mouseClick = Input.GetMouseButtonDown(0) && MouseSelector.HitCollider() == areaCollider;
-
-        if (mouseClick)
-        {
-            c.transform.SetParent(transform, false);
-        }
     }
 
     #endregion

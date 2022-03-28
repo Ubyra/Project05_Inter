@@ -46,9 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831657770a4fe0746abf2df24b7ce82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  col: {fileID: 1500334949859871509}
+  spotOrder: 0
+  playerSpot: 0
+  cardInThisSpot: {fileID: 0}
+  spotCollider: {fileID: 1500334949859871509}
   modelTransform: {fileID: 1949220333068696177}
-  matchSystem: {fileID: 0}
 --- !u!1 &2977432059410288287
 GameObject:
   m_ObjectHideFlags: 0

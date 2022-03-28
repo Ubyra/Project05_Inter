@@ -10,7 +10,7 @@ public class MatchState_MyTurn : MatchState
 
     public override IEnumerator Start()
     {
-        waitTime = new WaitForSeconds(2f);
+        waitTime = new WaitForSeconds(0.3f);
         Debug.Log("_My Turn");
 
         System.PlayerHand.canHighlightCard = false;
@@ -20,7 +20,7 @@ public class MatchState_MyTurn : MatchState
 
     public override IEnumerator DrawCard(Deck deck)
     {
-        waitTime = new WaitForSeconds(0.6f);
+        waitTime = new WaitForSeconds(0.3f);
 
         System.PlayerHand.DrawCard(deck);
 

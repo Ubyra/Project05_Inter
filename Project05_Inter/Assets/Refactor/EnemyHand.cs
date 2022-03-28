@@ -100,17 +100,36 @@ public class EnemyHand : Hand
         UpdateCardPosition();
     }
 
-    public override void DiscardCard(GameObject card, Transform position)
+    public override void DiscardCard(int cardIndex, Transform position)
     {
-        Debug.Log("Discard");
+        DiscardDeck.Card.Add(CardsInHand[cardIndex]);
 
-        card.transform.SetParent(position, true);
-
-        card.GetComponent<CardSystem>().StartCardMovement(DiscardDeck.transform.position, DiscardDeck.transform.rotation, 0.3f);
+        CardsInHand[cardIndex].transform.SetParent(position, true);
+        CardsInHand.Remove(CardsInHand[cardIndex]);
 
         UpdateCardPosition();
 
-        CardsInHand.Remove(card);
+        DiscardDeck.Card[DiscardDeck.Card.Count - 1].GetComponent<CardSystem>().StartCardMovement(position.position, position.rotation, 0.3f);
+    }
+
+    public override void PutCard(int cardIndex, CardSpot spot)
+    {
+        spot.ReciveCard(CardsInHand[cardIndex]);
+
+        CardsInHand[cardIndex].transform.SetParent(spot.transform, true);
+        CardsInHand.Remove(CardsInHand[cardIndex]);
+
+        UpdateCardPosition();
+
+        spot.GetComponentInChildren<CardSystem>().StartCardMovement(spot.modelTransform.position, spot.modelTransform.rotation, 0.3f);
+    }
+
+    public override void DiscardAllHand()
+    {
+        foreach (GameObject g in CardsInHand)
+        {
+            DiscardCard(g, DiscardDeck.transform);
+        }
     }
     #endregion
 }

@@ -10,6 +10,17 @@ public class DiscardDeck : Deck
     {
         areaCollider = GetComponent<Collider>();
     }
+
+    private void Update()
+    {
+        if(Card.Count > 0)
+        {
+            foreach(GameObject g in Card)
+            {
+                g.GetComponent<CardSystem>().MovementCard();
+            }
+        }
+    }
     #endregion
 
     #region Métodos override
@@ -86,23 +97,21 @@ public class DiscardDeck : Deck
 
     public override void DrawCard(Transform t)
     {
-        bool mouseClick = Input.GetMouseButtonDown(0) && MouseSelector.HitCollider() == areaCollider;
+        Transform child = transform.GetChild(0);
 
-        if (mouseClick)
-        {
-            Transform child = transform.GetChild(0);
-
-            child.SetParent(t, false);
-        }
+        child.SetParent(t, true);
+        Card.Remove(Card[0]);
     }
 
-    public override void ReturnCard(GameObject c)
+    public override void ReturnAllDiscardDeck(Transform position)
     {
-        bool mouseClick = Input.GetMouseButtonDown(0) && MouseSelector.HitCollider() == areaCollider;
-
-        if (mouseClick)
+        if(Card.Count > 0)
         {
-            c.transform.SetParent(transform, false);
+            foreach (GameObject g in Card)
+            {
+                g.transform.SetParent(position, false);
+                Card.Remove(g);
+            }
         }
     }
 

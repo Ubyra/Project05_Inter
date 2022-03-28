@@ -24,7 +24,19 @@ public abstract class Hand : MonoBehaviour
     {
     }
 
-    public virtual void PutCard(GameObject card)
+    public virtual void DiscardCard(int cardIndex, Transform position)
+    {
+    }
+
+    public virtual void DiscardAllHand()
+    {
+    }
+
+    public virtual void PutCard(GameObject card, CardSpot spot)
+    {
+    }
+
+    public virtual void PutCard(int cardIndex, CardSpot spot)
     {
     }
 

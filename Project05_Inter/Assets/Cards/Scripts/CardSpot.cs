@@ -6,16 +6,30 @@ public class CardSpot : MonoBehaviour
 {
     [Header("Spot Atributes")]
     public int spotOrder;
-    public Collider col;
-    public Transform modelTransform;
+    public bool playerSpot;
+    public GameObject cardInThisSpot;
+    private bool startUpdating;
 
-    public MatchSystem matchSystem;
+    [Header("External Scripts")]
+    public Collider spotCollider;
+    public Transform modelTransform;
 
     private void Update()
     {
-        if(MouseSelector.HitCollider() == col && Input.GetMouseButton(0))
+        if (startUpdating)
+        {
+            cardInThisSpot.GetComponent<CardSystem>().MovementCard();
+        }
+
+        if(MouseSelector.HitCollider() == spotCollider && Input.GetMouseButton(0))
         {
             //matchSystem.clickedSpot = this;
         }
+    }
+
+    public void ReciveCard(GameObject card)
+    {
+        cardInThisSpot = card;
+        startUpdating = true;
     }
 }

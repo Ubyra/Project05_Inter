@@ -10,30 +10,36 @@ public class MatchState_PutDown : MatchState
 
     public override IEnumerator Start()
     {
-        waitTime = new WaitForSeconds(2f);
+        waitTime = new WaitForSeconds(0.3f);
         Debug.Log("_Put Down a Card");
 
         System.PlayerHand.canHighlightCard = true;
-        System.PlayerHand.canMoveCard = true;
+
         return base.Start();
     }
 
     public override IEnumerator SelectCard()
     {
-        waitTime = new WaitForSeconds(2f);
+        waitTime = new WaitForSeconds(0.3f);
 
-        // Card is Selected ? Animation to Select : Animation to Hand;
+        System.PlayerHand.SelectCard();
 
         yield return waitTime;
     }
 
     public override IEnumerator PutCard()
     {
-        waitTime = new WaitForSeconds(2f);
+        waitTime = new WaitForSeconds(0.3f);
 
         System.PlayerHand.canHighlightCard = false;
-        //System.PlayerHand.canMoveCard = false;
+
         // Put the Card;
+        System.PlayerHand.PutCard(System.PlayerHand._selectedCard, System.Board.PlayerSpots[System.Turn]);
+
+        yield return waitTime;
+
+        System.NextTurn();
+        System.CheckEndTurn();
 
         yield return waitTime;
 

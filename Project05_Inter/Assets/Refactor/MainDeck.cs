@@ -89,6 +89,29 @@ public class MainDeck : Deck
 
         debug += "[Cards Shuffled]";
         Debug.Log(debug);
+
+        UpdateDeckVisuals();
+    }
+
+    public override void AddCard(GameObject card)
+    {
+        List<GameObject> tempList = new List<GameObject>();
+
+        tempList.Add(card);
+
+        for (int i = 0; i < Card.Count; i++)
+        {
+            tempList.Add(Card[i]);
+        }
+
+        Card.Clear();
+
+        foreach (GameObject g in tempList)
+        {
+            Card.Add(g);
+        }
+
+        UpdateDeckVisuals();
     }
 
     public override void DrawCard(Transform t)
@@ -97,6 +120,7 @@ public class MainDeck : Deck
 
         child.SetParent(t, true);
         Card.Remove(Card[0]);
+        UpdateDeckVisuals();
     }
 
     #endregion
@@ -127,6 +151,18 @@ public class MainDeck : Deck
         Debug.Log(debug);
 
         UpdateUiElements();
+        UpdateDeckVisuals();
+    }
+
+    public override void UpdateDeckVisuals()
+    {
+        for (int i = 0; i < Card.Count; i++)
+        {
+            if (i == 0)
+                Card[i].GetComponent<CardSystem>().cardModel.SetActive(true);
+            else
+                Card[i].GetComponent<CardSystem>().cardModel.SetActive(false);
+        }
     }
 
     private void UpdateUiElements()

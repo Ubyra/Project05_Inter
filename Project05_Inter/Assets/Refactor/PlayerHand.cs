@@ -120,14 +120,14 @@ public class PlayerHand : Hand
 
     public override void DiscardCard(GameObject card, Transform position)
     {
-        DiscardDeck.Card.Add(card);
+        DiscardDeck.AddCard(card);
 
         card.transform.SetParent(position, true);
         CardsInHand.Remove(card);
 
         UpdateCardPosition();
 
-        DiscardDeck.Card[DiscardDeck.Card.Count - 1].GetComponent<CardSystem>().StartCardMovement(position.position, position.rotation, 0.3f);
+        DiscardDeck.Card[0].GetComponent<CardSystem>().StartCardMovement(position.position, position.rotation, 0.3f);
 
         _selectedCard = null;
     }
@@ -175,9 +175,11 @@ public class PlayerHand : Hand
 
     public override void DiscardAllHand()
     {
-        foreach (GameObject g in CardsInHand)
+        int hand = CardsInHand.Count;
+
+        for (int i = 0; i < hand; i++)
         {
-            DiscardCard(g, DiscardDeck.transform);
+            DiscardCard(CardsInHand[0], DiscardDeck.transform);
         }
     }
     #endregion

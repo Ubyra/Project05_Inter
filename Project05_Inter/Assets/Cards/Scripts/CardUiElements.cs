@@ -13,6 +13,7 @@ public class CardUiElements : MonoBehaviour
     [SerializeField] public Sprite[] suitsSprites;
 
     [Header("Card Elements")]
+    [SerializeField] public TMP_Text cardName;
     [SerializeField] public TMP_Text number1;
     [SerializeField] public TMP_Text number2;
     [SerializeField] public Image suit1;
@@ -26,6 +27,7 @@ public class CardUiElements : MonoBehaviour
 
     public void UpdateElements()
     {
+        cardName.text = card.Config.cardName;
         number1.text = card.Config.cardValue.ToString();
         number2.text = card.Config.cardValue.ToString();
 

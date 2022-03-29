@@ -14,6 +14,7 @@ public class RoundSystem : MonoBehaviour
 
         Match.PlayerHand.DiscardAllHand();
         Match.EnemyHand.DiscardAllHand();
+        Match.Board.DiscardSpots();
 
         yield return WaitTime;
 
@@ -27,5 +28,9 @@ public class RoundSystem : MonoBehaviour
 
         StartCoroutine(Match.PlayerHand.FirstDraw());
         StartCoroutine(Match.EnemyHand.FirstDraw());
+
+        yield return WaitTime;
+
+        Match.SetState(new MatchState_EnemyTurn(Match));
     }
 }

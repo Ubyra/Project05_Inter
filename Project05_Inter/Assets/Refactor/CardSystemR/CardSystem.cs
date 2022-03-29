@@ -9,6 +9,7 @@ public class CardSystem : Card_StateMachineR
     public CardUiElements UIElements;
 
     [Header("External Scripts")]
+    public GameObject cardModel;
     public Collider cardCollider;
     public IHighlightSelection highlightSelection;
     public bool IsMouseOver => MouseSelector.HitCollider() == cardCollider;

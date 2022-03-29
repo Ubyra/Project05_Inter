@@ -29,4 +29,13 @@ public abstract class Deck : MonoBehaviour
     public virtual void ReturnAllDiscardDeck(Transform position)
     {
     }
+
+    public virtual void AddCard(GameObject card)
+    {
+    }
+
+
+    public virtual void UpdateDeckVisuals()
+    {
+    }
 }

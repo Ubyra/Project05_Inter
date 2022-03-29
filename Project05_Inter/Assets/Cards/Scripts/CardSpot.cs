@@ -16,14 +16,9 @@ public class CardSpot : MonoBehaviour
 
     private void Update()
     {
-        if (startUpdating)
+        if (startUpdating && cardInThisSpot != null)
         {
             cardInThisSpot.GetComponent<CardSystem>().MovementCard();
-        }
-
-        if(MouseSelector.HitCollider() == spotCollider && Input.GetMouseButton(0))
-        {
-            //matchSystem.clickedSpot = this;
         }
     }
 

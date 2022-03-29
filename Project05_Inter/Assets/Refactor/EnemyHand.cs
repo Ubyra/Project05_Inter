@@ -102,14 +102,14 @@ public class EnemyHand : Hand
 
     public override void DiscardCard(int cardIndex, Transform position)
     {
-        DiscardDeck.Card.Add(CardsInHand[cardIndex]);
+        DiscardDeck.AddCard(CardsInHand[cardIndex]);
 
         CardsInHand[cardIndex].transform.SetParent(position, true);
         CardsInHand.Remove(CardsInHand[cardIndex]);
 
         UpdateCardPosition();
 
-        DiscardDeck.Card[DiscardDeck.Card.Count - 1].GetComponent<CardSystem>().StartCardMovement(position.position, position.rotation, 0.3f);
+        DiscardDeck.Card[0].GetComponent<CardSystem>().StartCardMovement(position.position, position.rotation, 0.3f);
     }
 
     public override void PutCard(int cardIndex, CardSpot spot)
@@ -126,9 +126,11 @@ public class EnemyHand : Hand
 
     public override void DiscardAllHand()
     {
-        foreach (GameObject g in CardsInHand)
+        int hand = CardsInHand.Count;
+
+        for (int i = 0; i < hand; i++)
         {
-            DiscardCard(g, DiscardDeck.transform);
+            DiscardCard(0, DiscardDeck.transform);
         }
     }
     #endregion

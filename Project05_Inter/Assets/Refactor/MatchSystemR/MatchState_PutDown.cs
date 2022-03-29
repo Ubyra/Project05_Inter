@@ -40,10 +40,6 @@ public class MatchState_PutDown : MatchState
 
         System.NextTurn();
         System.CheckEndTurn();
-
-        yield return waitTime;
-
-        System.SetState(new MatchState_EnemyTurn(System));
     }
 
     public override void CardOverlaySelection()

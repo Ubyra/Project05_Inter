@@ -79,9 +79,13 @@ public class MatchSystem : MatchSystem_StateMachine
 
     public void CheckEndTurn()
     {
-        if(Turn >= Board.PlayerSpots.Count - 1)
+        if(Turn > Board.PlayerSpots.Count - 1)
         {
             StartCoroutine(RoundSystem.NextRound());
+        }
+        else
+        {
+            SetState(new MatchState_EnemyTurn(this));
         }
     }
 }

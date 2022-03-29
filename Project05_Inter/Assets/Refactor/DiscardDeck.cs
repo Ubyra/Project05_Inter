@@ -101,17 +101,42 @@ public class DiscardDeck : Deck
 
         child.SetParent(t, true);
         Card.Remove(Card[0]);
+        UpdateDeckVisuals();
+    }
+
+    public override void AddCard(GameObject card)
+    {
+        List<GameObject> tempList = new List<GameObject>();
+
+        tempList.Add(card);
+
+        for (int i = 0; i < Card.Count; i++)
+        {
+            tempList.Add(Card[i]);
+        }
+
+        Card.Clear();
+
+        foreach(GameObject g in tempList)
+        {
+            Card.Add(g);
+        }
+
+        UpdateDeckVisuals();
     }
 
     public override void ReturnAllDiscardDeck(Transform position)
     {
         if(Card.Count > 0)
         {
-            foreach (GameObject g in Card)
-            {
-                g.transform.SetParent(position, false);
-                Card.Remove(g);
-            }
+            int cards = Card.Count;
+
+            //for (int i = 0; i < cards; i++)
+            //{
+            //    Match.DiscardDeck.AddCard(PlayerSpots[i].cardInThisSpot);
+            //    PlayerSpots[i].cardInThisSpot.transform.SetParent(Match.DiscardDeck.transform, true);
+            //    PlayerSpots[i].cardInThisSpot.GetComponent<CardSystem>().StartCardMovement(Match.DiscardDeck.transform.position, Match.DiscardDeck.transform.rotation, 0.3f);
+            //}
         }
     }
 
@@ -141,6 +166,17 @@ public class DiscardDeck : Deck
         debug += "-- Fill Deck Configs Complete \n";
         debug += "[Deck Configs Filled] \n";
         Debug.Log(debug);
+    }
+
+    public override void UpdateDeckVisuals()
+    {
+        for (int i = 0; i < Card.Count; i++)
+        {
+            if (i == 0)
+                Card[i].GetComponent<CardSystem>().cardModel.SetActive(true);
+            else
+                Card[i].GetComponent<CardSystem>().cardModel.SetActive(false);
+        }
     }
 
     private bool ExistNumberInArray(int number, List<int> array)

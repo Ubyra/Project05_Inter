@@ -26,6 +26,9 @@ public class Board : MonoBehaviour
         if (PlayerSpots.Count > 0)
             PlayerSpots.Clear();
 
+        if (EnemySpots.Count > 0)
+            EnemySpots.Clear();
+
         var childs = GetComponentsInChildren<CardSpot>();
 
         foreach(CardSpot c in childs)
@@ -34,6 +37,28 @@ public class Board : MonoBehaviour
                 PlayerSpots.Add(c);
             else
                 EnemySpots.Add(c);
+        }
+    }
+
+    public void DiscardSpots()
+    {
+        for (int i = 0; i < PlayerSpots.Count; i++)
+        {
+            if(PlayerSpots[i].cardInThisSpot != null)
+            {
+                Match.DiscardDeck.AddCard(PlayerSpots[i].cardInThisSpot);
+                PlayerSpots[i].cardInThisSpot.transform.SetParent(Match.DiscardDeck.transform, true);
+                PlayerSpots[i].cardInThisSpot.GetComponent<CardSystem>().StartCardMovement(Match.DiscardDeck.transform.position, Match.DiscardDeck.transform.rotation, 0.3f);
+                PlayerSpots[i].cardInThisSpot = null;
+            }
+
+            if (EnemySpots[i].cardInThisSpot != null)
+            {
+                Match.DiscardDeck.AddCard(EnemySpots[i].cardInThisSpot);
+                EnemySpots[i].cardInThisSpot.transform.SetParent(Match.DiscardDeck.transform, true);
+                EnemySpots[i].cardInThisSpot.GetComponent<CardSystem>().StartCardMovement(Match.DiscardDeck.transform.position, Match.DiscardDeck.transform.rotation, 0.3f);
+                EnemySpots[i].cardInThisSpot = null;
+            }
         }
     }
 

@@ -125,19 +125,37 @@ public class DiscardDeck : Deck
         UpdateDeckVisuals();
     }
 
-    public override void ReturnAllDiscardDeck(Transform position)
+    public override void ReturnAllDiscardDeck(Deck deck)
     {
-        if(Card.Count > 0)
-        {
-            int cards = Card.Count;
+        string debug = "";
+        int cards = Card.Count;
 
-            //for (int i = 0; i < cards; i++)
-            //{
-            //    Match.DiscardDeck.AddCard(PlayerSpots[i].cardInThisSpot);
-            //    PlayerSpots[i].cardInThisSpot.transform.SetParent(Match.DiscardDeck.transform, true);
-            //    PlayerSpots[i].cardInThisSpot.GetComponent<CardSystem>().StartCardMovement(Match.DiscardDeck.transform.position, Match.DiscardDeck.transform.rotation, 0.3f);
-            //}
+        debug += "Start Discarding Deck. Deck has: " + cards + " cards. \nLet's begin! \n\n";
+
+        for (int i = 0; i < cards; i++)
+        {
+            debug += "- Start processing to start Card " + i + "\n";
+
+            deck.AddCard(Card[0]);
+            debug += "- Card" + i + "Added to the " + deck.name + "\n";
+
+            Card[0].transform.SetParent(deck.transform, true);
+            debug += "- Card" + i + "setted transform to the " + deck.name + "\n";
+
+            Card[0].GetComponent<CardSystem>().StartCardMovement(deck.transform.position, deck.transform.rotation, 0.3f);
+            debug += "- Card" + i + "starting movement" + "\n";
+
+            Card.Remove(Card[0]);
+            debug += "- Removing Card" + i + "from my Discard Deck." + "\n\n";
         }
+
+        debug += "End Debugging. \nNow my deck have " + Card.Count + "cards. \n";
+
+        Card.Clear();
+        debug += "Clean Cards\n";
+        debug += "Now my deck have " + Card.Count + "cards. \n";
+
+        Debug.Log(debug);
     }
 
     #endregion

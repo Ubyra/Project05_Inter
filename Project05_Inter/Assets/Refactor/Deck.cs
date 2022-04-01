@@ -26,7 +26,7 @@ public abstract class Deck : MonoBehaviour
     {
     }
 
-    public virtual void ReturnAllDiscardDeck(Transform position)
+    public virtual void ReturnAllDiscardDeck(Deck deck)
     {
     }
 
